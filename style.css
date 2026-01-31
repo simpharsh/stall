@@ -1,0 +1,357 @@
+:root {
+    --primary: #6C63FF;
+    --primary-dark: #5a52d5;
+    --accent: #FF6584;
+    --bg-gradient: linear-gradient(135deg, #1e1e2f 0%, #2d2b42 100%);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-muted: #a0a0b0;
+    --success: #00d26a;
+    --warning: #f5a623;
+}
+
+* {
+    box-sizing: border_box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1,
+h2 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    background: rgba(30, 30, 47, 0.8);
+    /* Darker, less transparent for readability */
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+option {
+    background-color: #2d2b42;
+    /* Match theme background */
+    color: white;
+}
+
+select:focus,
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+.price-display div {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--success);
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-control input {
+    text-align: center;
+    width: 60px;
+    -moz-appearance: textfield;
+    /* Firefox */
+    appearance: textfield;
+    /* Standard */
+}
+
+.qty-control input::-webkit-outer-spin-button,
+.qty-control input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qty-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.qty-btn:active {
+    transform: scale(0.95);
+}
+
+/* Radio Cards */
+.radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+.radio-card {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-card input {
+    display: none;
+}
+
+.radio-label {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    transition: 0.3s;
+}
+
+.radio-card input:checked+.radio-label {
+    background: var(--primary);
+    border-color: var(--primary);
+    font-weight: 600;
+}
+
+/* Checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.checkbox-container input {
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.checkbox-container input:checked~.checkmark {
+    background-color: var(--success);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Limit size of Order Input section */
+.order-section {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.total-price-section {
+    background: rgba(108, 99, 255, 0.1);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.total-price-section span:last-child {
+    font-size: 1.5rem;
+    color: var(--success);
+}
+
+/* Table Styles */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.9rem;
+}
+
+th {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+tfoot td {
+    border-top: 2px solid var(--glass-border);
+    border-bottom: none;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* History Section */
+.history-section {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
+
+@media (max-width: 900px) {
+    .history-section {
+        grid-column: 1 / 2;
+        grid-row: auto;
+    }
+}
+
+.status-paid {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.status-pending {
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.summary-section {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
