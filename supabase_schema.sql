@@ -1,0 +1,29 @@
+-- Create Menu Table
+CREATE TABLE IF NOT EXISTS menu (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+
+-- Seed Menu Data
+INSERT INTO menu (name, price) VALUES 
+('KUNAFA ICE CREAM WITH PISTACHIO', 149),
+('KUNAFA ICE CREAM WITH STRAWBERRY', 149),
+('KUNAFA ICE CREAM WITH DARK CHOCOLATE', 149),
+('KUNAFA ICE CREAM WITH MILK CHOCOLATE', 149),
+('KUNAFA ICE CREAM WITH WHITE CHOCOLATE', 149),
+('KUNAFA ICE CREAM WITH TRIPLE CHOCOLATE', 149)
+ON CONFLICT DO NOTHING;
+
+-- Create Orders Table
+CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    dish_id INT REFERENCES menu(id),
+    dish_name VARCHAR(255),
+    quantity INT,
+    price_per_unit DECIMAL(10,2),
+    total_price DECIMAL(10,2),
+    payment_method VARCHAR(50),
+    payment_status VARCHAR(50), -- 'Paid', 'Pending'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

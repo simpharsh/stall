@@ -48,13 +48,13 @@ if ($action === 'get_summary') {
     // Summary for TODAY
     $sql = "SELECT dish_name, SUM(quantity) as total_qty, SUM(total_price) as total_revenue 
             FROM orders 
-            WHERE DATE(created_at) = CURDATE() 
+            WHERE DATE(created_at) = CURRENT_DATE 
             GROUP BY dish_name";
     $stmt = $pdo->query($sql);
     $data = $stmt->fetchAll();
 
     // Calculate Grand Total
-    $grandTotalSql = "SELECT SUM(total_price) as grand_total FROM orders WHERE DATE(created_at) = CURDATE()";
+    $grandTotalSql = "SELECT SUM(total_price) as grand_total FROM orders WHERE DATE(created_at) = CURRENT_DATE";
     $stmtTotal = $pdo->query($grandTotalSql);
     $grandTotalResult = $stmtTotal->fetch();
     $grandTotal = $grandTotalResult['grand_total'] ?? 0;
