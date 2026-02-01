@@ -7,7 +7,6 @@ const OrderForm = ({ onOrderAdded }) => {
     const [quantity, setQuantity] = useState(1);
     const [paymentMethod, setPaymentMethod] = useState('GPay');
     const [isPaid, setIsPaid] = useState(true);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchMenu();
@@ -17,7 +16,6 @@ const OrderForm = ({ onOrderAdded }) => {
         const { data, error } = await supabase.from('menu').select('*');
         if (error) console.error('Error fetching menu:', error);
         else setMenu(data || []);
-        setLoading(false);
     };
 
     const getPrice = () => {

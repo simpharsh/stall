@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import { Clock, CheckCircle } from 'lucide-react';
 
 const OrderHistory = ({ refreshTrigger }) => {
     const [history, setHistory] = useState([]);
