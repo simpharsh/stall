@@ -7,6 +7,8 @@ const OrderForm = ({ onOrderAdded }) => {
     const [quantity, setQuantity] = useState(1);
     const [paymentMethod, setPaymentMethod] = useState('GPay');
     const [isPaid, setIsPaid] = useState(true);
+    const [customerName, setCustomerName] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
 
     useEffect(() => {
         fetchMenu();
@@ -39,7 +41,9 @@ const OrderForm = ({ onOrderAdded }) => {
                 price_per_unit: pricePerUnit,
                 total_price: totalPrice,
                 payment_method: paymentMethod,
-                payment_status: isPaid ? 'Paid' : 'Pending'
+                payment_status: isPaid ? 'Paid' : 'Pending',
+                customer_name: customerName,
+                mobile_number: mobileNumber
             }
         ]);
 
@@ -49,6 +53,8 @@ const OrderForm = ({ onOrderAdded }) => {
             // Reset form
             setSelectedDishId('');
             setQuantity(1);
+            setCustomerName('');
+            setMobileNumber('');
             if (onOrderAdded) onOrderAdded();
         }
     };
@@ -59,6 +65,28 @@ const OrderForm = ({ onOrderAdded }) => {
                 <h1>New Order</h1>
             </header>
             <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="customerName">Customer Name</label>
+                    <input
+                        type="text"
+                        id="customerName"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        placeholder="Optional"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="mobileNumber">Mobile Number</label>
+                    <input
+                        type="tel"
+                        id="mobileNumber"
+                        value={mobileNumber}
+                        onChange={(e) => setMobileNumber(e.target.value)}
+                        placeholder="Optional"
+                    />
+                </div>
+
                 <div className="form-group">
                     <label htmlFor="dishSelect">Select Dish</label>
                     <select
