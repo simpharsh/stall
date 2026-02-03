@@ -549,3 +549,29 @@ tr:last-child td {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
+/* Mobile Layout Overrides - Appended to ensure precedence */
+@media (max-width: 900px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    /* Reset any grid leftovers */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+  }
+
+  /* Force sections to flow naturally in the flex container */
+  .order-section,
+  .history-section,
+  .summary-section {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Order adjustment if needed: Form (1), Summary (2), History (3) 
+     Default DOM order is Form, Summary, History, so this should be fine.
+  */
+}
+
